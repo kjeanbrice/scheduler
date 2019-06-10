@@ -322,6 +322,9 @@
       -ms-animation: pulse 6s ease infinite;
       -o-animation: pulse 6s ease infinite;
       animation: pulse 6s ease infinite; }
+    .dz-progress{
+      opacity: 0 !important;
+    }
     .dropzone .dz-preview .dz-progress {
       opacity: 1;
       z-index: 1000;

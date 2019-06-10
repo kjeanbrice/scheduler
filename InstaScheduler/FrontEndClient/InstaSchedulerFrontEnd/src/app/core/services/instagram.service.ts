@@ -3,19 +3,23 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular
 import { retryWhen, delay, take, map, catchError, concatMap, scan, delayWhen } from 'rxjs/operators';
 import { throwError, Observable, concat, of, timer } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class InstagramService {
 
   static readonly BASE_URL: string = document.getElementById('baseurl-asp').innerHTML;
 
   constructor(private http: HttpClient) { }
 
-  isAuth(): Observable<boolean> {
+  createPost(file: File, content: string) {
 
+    const formparams = new FormData();
+    formparams.append(file.name, file, file.name);
+    formparams.append('content', content);
 
-    return this.http.get<boolean>(AuthService.BASE_URL + '/api/instagram/isauth').pipe(
+    return this.http.post(InstagramService.BASE_URL + '/api/instagram/createpost', formparams).pipe(
       retryWhen((errors) => {
         return errors.pipe(
           delay(3000),
@@ -31,35 +35,8 @@ export class AuthService {
       catchError((err: any) => { console.log(err.status); return this.errorHandler(err); })
     );
 
-  }
 
 
-  login(password: string, username: string): Observable<any> {
-    let params = new HttpParams();
-    params = params.set('username', username);
-    params = params.set('password', password);
-
- 
-
-    return this.http.post(AuthService.BASE_URL + '/api/instagram/auth', params).pipe(
-      retryWhen((errors) => {
-        return errors.pipe(
-          delay(3000),
-          concatMap((error, index) => {
-            if (index === 1) {
-              return throwError(error);
-            }
-            return of(null);
-          })
-
-        );
-      }),
-      map((response: Response) => {
-        console.log('Auth: Login');
-        return response;
-      }),
-      catchError((err: any) => { console.log(err.status); return this.errorHandler(err); })
-    );
   }
 
 

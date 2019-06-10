@@ -44,7 +44,7 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="form-group">
-                      <form action="javascript:void(0)" class="dropzone dropzone-dotted" id="postimage">
+                      <form action="javascript:void(0)" class="dropzone dropzone-properties" id="postimage">
                         <div class="fallback">
                           <input name="file" type="file" multiple />
                         </div>
@@ -53,18 +53,14 @@
 
                   
                   </div>
-                </div>
 
-                <div class="row">
+
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="form-group">
-                      <label class="form-label">Post Description
-                        <span class="form-required">*</span>
-                      </label>
                       <textarea attr.maxlength="{{MAX_DESCRIPTION_LIMIT}}" id="post-description"
                       (input)="onUpdateCreateGroup($event)" (keyup)="onUpdateCreateGroup($event)"
                       class="form-control" name="group-description" style="resize: none;" rows="6"
-                      placeholder="Enter a short description about your post"></textarea>
+                      placeholder="What would you like to share?"></textarea>
                       
                       <div id="error-joingroup-code" class="invalid-feedback">{{error_create_group_code}}</div>
                       <div id="error-joingroup-server" class="invalid-feedback">{{error_join_group_server}}</div>
@@ -72,6 +68,8 @@
 
                   </div>
                 </div>
+
+              
               </div>
             </form>
           </div>

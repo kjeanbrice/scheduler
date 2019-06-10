@@ -6,6 +6,12 @@
     text-align: center; 
 }
 
-.dropzone-dotted{
-    border-style:dotted;
+.dropzone-properties{
+    border-style:dashed;
+    text-align:center;
+    border-color: #467fcf;
+}
+
+.dz-progress{
+    display:none;
 }
