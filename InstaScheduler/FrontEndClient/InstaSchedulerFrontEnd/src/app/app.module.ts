@@ -7,6 +7,8 @@ import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
 import { LoginModule } from './login/login.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { CoreModule } from './core/core.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -17,10 +19,12 @@ import { DashboardModule } from './dashboard/dashboard.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     HomeModule,
     SharedModule,
     LoginModule,
-    DashboardModule
+    DashboardModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

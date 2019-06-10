@@ -78,9 +78,28 @@ namespace InstaScheduler.Controllers
             };
 
             IInstaApi api = (IInstaApi)HttpContext.Current.Session["api"];
+            
             var user_data = await api.GetCurrentUserAsync();
             return Ok();
         }
+
+        [HttpGet]
+        [Route("IsAuth")]
+        public bool isAuthententicated()
+        {
+
+         
+            IInstaApi api = (IInstaApi)HttpContext.Current.Session["api"];
+            if(api == null)
+            {
+                return true;
+            }
+
+            bool user_authentication = api.IsUserAuthenticated;
+            return user_authentication;
+        }
+
+
 
 
         [HttpPost]

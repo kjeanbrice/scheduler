@@ -23,9 +23,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/dropzone.css"
             ],
-            "scripts": [],
+            "scripts": ["src/assets/js/dropzone.js"],
             "es5BrowserSupport": true
           },
           "configurations": {

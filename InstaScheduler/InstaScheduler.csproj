@@ -245,6 +245,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\Angular\assets\css\dropzone.css" />
+    <Content Include="Content\Angular\assets\images\favicon.ico" />
+    <Content Include="Content\Angular\assets\images\instaschedule_lg.png" />
+    <Content Include="Content\Angular\assets\images\logo.png" />
+    <Content Include="Content\Angular\assets\images\nav_icon.png" />
+    <Content Include="Content\Angular\assets\js\dropzone.js" />
     <Content Include="Content\Angular\es2015-polyfills.js" />
     <Content Include="Content\Angular\favicon.ico" />
     <Content Include="Content\Angular\index.html" />

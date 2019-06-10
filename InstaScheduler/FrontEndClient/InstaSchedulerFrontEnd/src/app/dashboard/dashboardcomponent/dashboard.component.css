@@ -1,3 +1,11 @@
 .card-expand-profile{
     min-height: 500px;
 }
+
+.modal-title-settings{
+    text-align: center; 
+}
+
+.dropzone-dotted{
+    border-style:dotted;
+}

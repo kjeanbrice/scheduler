@@ -25,6 +25,72 @@
       </div>
     </div>
 
+
+    <!--Modal Area-->
+
+    <!--Create Instagram Post Modal-->
+    <div class="modal fade" id="create-post-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="col-12 modal-title modal-title-settings" id="exampleModalLongTitle"> Create an Instagram Post
+              <button id="joinmodal-close" type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </h5>
+          </div>
+          <div class="modal-body">
+            <form action="javascript:void(0);" action="post">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group">
+                      <form action="javascript:void(0)" class="dropzone dropzone-dotted" id="postimage">
+                        <div class="fallback">
+                          <input name="file" type="file" multiple />
+                        </div>
+                      </form>
+                    </div>
+
+                  
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group">
+                      <label class="form-label">Post Description
+                        <span class="form-required">*</span>
+                      </label>
+                      <textarea attr.maxlength="{{MAX_DESCRIPTION_LIMIT}}" id="post-description"
+                      (input)="onUpdateCreateGroup($event)" (keyup)="onUpdateCreateGroup($event)"
+                      class="form-control" name="group-description" style="resize: none;" rows="6"
+                      placeholder="Enter a short description about your post"></textarea>
+                      
+                      <div id="error-joingroup-code" class="invalid-feedback">{{error_create_group_code}}</div>
+                      <div id="error-joingroup-server" class="invalid-feedback">{{error_join_group_server}}</div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="{{css_loading_createpost}}">
+              <div class="loader"></div>
+              <div class="dimmer-content">
+                <button type="button" class="btn btn-primary" (click)="onSubmit($event)" id="btn-postimage">Submit Post
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Instagram Post Modal-->
+    <!-- End Modal Area -->
+
     <div class="my-3 my-mid-5">
       <div class="container">
         <div class="row">
@@ -39,31 +105,32 @@
                 <p class="mb-4">
                   Big belly rude boy, million dollar hustler. Unemployed.
                 </p>
-                <button class="btn btn-success">Create Instagram Post!</button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#create-post-modal">Create Instagram
+                  Post!</button>
               </div>
 
             </div>
           </div>
 
           <div class="col-lg-8">
-              <div class="page-header">
-                  <h1 class="page-title">
-                    My Instagram Posts
-                  </h1>
-                  <div class="page-subtitle">1 - 12 of 1713 photos</div>
-                  <div class="page-options d-flex">
-                    <select class="form-control custom-select w-auto">
-                      <option value="asc">Newest</option>
-                      <option value="desc">Oldest</option>
-                    </select>
-                    <div class="input-icon ml-2">
-                      <span class="input-icon-addon">
-                        <i class="fe fe-search"></i>
-                      </span>
-                      <input type="text" class="form-control w-10" placeholder="Search photo">
-                    </div>
-                  </div>
+            <div class="page-header">
+              <h1 class="page-title">
+                My Instagram Posts
+              </h1>
+              <div class="page-subtitle">1 - 12 of 1713 photos</div>
+              <div class="page-options d-flex">
+                <select class="form-control custom-select w-auto">
+                  <option value="asc">Newest</option>
+                  <option value="desc">Oldest</option>
+                </select>
+                <div class="input-icon ml-2">
+                  <span class="input-icon-addon">
+                    <i class="fe fe-search"></i>
+                  </span>
+                  <input type="text" class="form-control w-10" placeholder="Search photo">
                 </div>
+              </div>
+            </div>
 
 
             <div class="alert alert-primary">
