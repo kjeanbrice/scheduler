@@ -15,10 +15,13 @@ using System.Net;
 
 namespace InstaScheduler.Controllers
 {
+
+    
     [RoutePrefix("api/Instagram")]
     public class InstagramAccountController : ApiController
     {
-       
+        static IInstaApi api = null;
+
         public InstagramAccountController()
         {
             
@@ -37,12 +40,12 @@ namespace InstaScheduler.Controllers
        
             HttpClientHandler handler = new HttpClientHandler()
             {
-                Proxy = new WebProxy("http://localhost:50569"),
+                Proxy = new WebProxy(),
                 UseProxy = true,
             };
 
 
-            IInstaApi api = InstaApiBuilder.CreateBuilder()
+             api = InstaApiBuilder.CreateBuilder()
                 .UseHttpClientHandler(handler)
                 .SetUser(data)
                 .Build();
@@ -64,11 +67,68 @@ namespace InstaScheduler.Controllers
         }
 
 
-        [HttpGet]
-        [Route("PostImage")]
-        public async Task<IHttpActionResult> PostImage()
+
+
+        [HttpPost]
+        [Route("createpost")]
+        public async Task<HttpResponseMessage> Post()
+        {
+            var httpRequest = HttpContext.Current.Request;
+
+            string content = httpRequest.Form["content"];
+            if(content == null)
+            {
+                content = "";
+            }
+
+
+
+            if (httpRequest.Files.Count > 0)
+            {
+                
+
+                var postedFile = httpRequest.Files[0];
+                string filePath = HttpContext.Current.Server.MapPath("~/InstagramPhotos/" + postedFile.FileName);
+                postedFile.SaveAs(filePath);
+
+
+                var mediaImage = new InstaImageUpload
+                {
+                    // leave zero, if you don't know how height and width is it.
+                    Height = 0,
+                    Width = 0,
+                    Uri = @"" + filePath
+                };
+
+                //IInstaApi api = (IInstaApi)HttpContext.Current.Session["api"];
+                if(api == null || api.IsUserAuthenticated == false)
+                {
+                    return Request.CreateResponse(HttpStatusCode.Unauthorized);
+                }
+
+                var result = await api.MediaProcessor.UploadPhotoAsync(mediaImage, content);
+
+
+
+
+                return Request.CreateResponse(HttpStatusCode.Created);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
+        }
+
+
+        
+       /* public async Task<IHttpActionResult> PostImage()
         {
 
+
+            new InstaImageUpload
+            {
+            }
+
+
+            
             var mediaImage = new InstaImageUpload
             {
                 // leave zero, if you don't know how height and width is it.
@@ -81,7 +141,7 @@ namespace InstaScheduler.Controllers
             
             var user_data = await api.GetCurrentUserAsync();
             return Ok();
-        }
+        }*/
 
         [HttpGet]
         [Route("IsAuth")]
@@ -92,7 +152,7 @@ namespace InstaScheduler.Controllers
             IInstaApi api = (IInstaApi)HttpContext.Current.Session["api"];
             if(api == null)
             {
-                return true;
+                return false;
             }
 
             bool user_authentication = api.IsUserAuthenticated;

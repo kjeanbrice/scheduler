@@ -16,8 +16,13 @@ export class InstagramService {
   createPost(file: File, content: string) {
 
     const formparams = new FormData();
-    formparams.append(file.name, file, file.name);
+    formparams.append(file.name, file);
     formparams.append('content', content);
+
+
+    let paramsOpt = new HttpParams();
+    paramsOpt = paramsOpt.set('content', content);
+
 
     return this.http.post(InstagramService.BASE_URL + '/api/instagram/createpost', formparams).pipe(
       retryWhen((errors) => {

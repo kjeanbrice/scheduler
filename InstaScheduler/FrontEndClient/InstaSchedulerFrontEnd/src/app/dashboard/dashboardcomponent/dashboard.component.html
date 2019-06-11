@@ -58,7 +58,7 @@
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="form-group">
                       <textarea attr.maxlength="{{MAX_DESCRIPTION_LIMIT}}" id="post-description"
-                      (input)="onUpdateCreateGroup($event)" (keyup)="onUpdateCreateGroup($event)"
+                      (input)="onUpdate($event,'post-content')" (keyup)="onUpdate($event,'post-content')"
                       class="form-control" name="group-description" style="resize: none;" rows="6"
                       placeholder="What would you like to share?"></textarea>
                       
@@ -75,10 +75,10 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <div class="{{css_loading_createpost}}">
+            <div class="{{cssLoadingCreatePost}}">
               <div class="loader"></div>
               <div class="dimmer-content">
-                <button type="button" class="btn btn-primary" (click)="onSubmit($event)" id="btn-postimage">Submit Post
+                <button type="button" class="btn btn-primary" (click)="onSubmitPost($event)" id="btn-postimage">Submit Post
                 </button>
               </div>
             </div>

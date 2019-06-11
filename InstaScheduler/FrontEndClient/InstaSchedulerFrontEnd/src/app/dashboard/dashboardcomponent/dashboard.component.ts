@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Dropzone from 'dropzone';
 import { InstagramService } from '../../core/services/instagram.service';
+import * as Validator from 'validator';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { InstagramService } from '../../core/services/instagram.service';
 export class DashboardComponent implements OnInit {
 
   MAX_DESCRIPTION_LIMIT = 2200;
-  css_loading_createpost = 'dimmer';
+  cssLoadingCreatePost = 'dimmer';
 
   postImage: File = null;
   postContent: string = null;
@@ -20,45 +21,60 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.initializeDropzoneComponents();
+    this.initializeLayoutComponents();
+  }
+
+
+  initializeLayoutComponents(): void {
+    document.getElementById('btn-postimage').setAttribute('disabled', '');
   }
 
 
   initializeDropzoneComponents(): void {
 
 
-    let myDropzone = new Dropzone('form#postimage', {
+    const postDropzone = new Dropzone('form#postimage', {
       autoProcessQueue: false,
       uploadMultiple: false,
       addRemoveLinks: true,
       thumbnailWidth: 350,
       thumbnailHeight: 350,
+      acceptedFiles: 'image/jpeg,image/png,image/gif',
       maxFiles: 1
     });
 
 
-    myDropzone.on('addedfile', (file) => {
-      console.log(JSON.stringify(myDropzone.getQueuedFiles()));
-      myDropzone.accept(file, (error) => {
-        console.log(error);
-      });
+    postDropzone.on('addedfile', (file) => {
+      if (postDropzone.files.length > 1) {
+        postDropzone.removeFile(postDropzone.files[0]);
+      }
+
+      const validImage = new RegExp('(\.png|\.jpg|\.jpeg|\.gif)$').test(file.name);
+      if (validImage) {
+        this.postImage = file;
+        document.getElementById('btn-postimage').removeAttribute('disabled');
+      } else {
+        this.postImage = null;
+        document.getElementById('btn-postimage').setAttribute('disabled', '');
+      }
     });
 
-    myDropzone.on('maxfilesexceeded', (file) => {
-      myDropzone.removeAllFiles();
-      myDropzone.addFile(file);
+
+    postDropzone.on('removedfile', (file) => {
+      document.getElementById('btn-postimage').setAttribute('disabled', '');
     });
 
 
-
-    myDropzone.on('complete', (data) => {
+    postDropzone.on('complete', (data) => {
       console.log('Complete: ' + JSON.stringify(data));
   });
   }
 
   onSubmitPost(): void {
 
+    this.cssLoadingCreatePost = 'dimmer active';
     if (this.postImage === null) {
-      this.css_loading_createpost = 'dimmer active';
+      this.cssLoadingCreatePost = 'dimmer';
       return;
     }
 
@@ -71,13 +87,35 @@ export class DashboardComponent implements OnInit {
         console.log(data);
         this.postContent = '';
         this.postImage = null;
-        this.css_loading_createpost = 'dimmer';
+        this.cssLoadingCreatePost = 'dimmer';
       },
       (error) => {
         console.log(error);
-        this.css_loading_createpost = 'dimmer';
+        this.cssLoadingCreatePost = 'dimmer';
       }
     );
+  }
+
+
+  onUpdate(event: any, itemId: string): void {
+
+    if (event === null || event === undefined) {
+      return;
+    }
+
+    switch (itemId) {
+      case 'post-content':
+        const content = event.target.value;
+        if (content.length === 0 || content.trim().length === 0) {
+          this.postContent = '';
+        } else {
+          this.postContent = content.trim();
+        }
+        break;
+        default:
+          console.log('(Dasboard: OnUpdate) Item ID not found');
+          break;
+    }
   }
 
 }
