@@ -89,19 +89,19 @@
     <!--End Instagram Post Modal-->
     <!-- End Modal Area -->
 
-    <div class="my-3 my-mid-5">
+    <div class="my-3 my-mid-5 animated bounceInLeft ">
       <div class="container">
         <div class="row">
 
           <div class="col-lg-4">
             <div class="card card-profile card-expand-profile">
               <div class="card-header"
-                style="background-image: url(demo/photos/eberhard-grossgasteiger-311213-500.jpg);"></div>
+                style="background-image: url(/content/angular/assets/images/profilebg.jpg);"></div>
               <div class="card-body text-center">
-                <img class="card-profile-img" src="demo/faces/male/16.jpg">
-                <h3 class="mb-3">Peter Richards</h3>
+                <img class="card-profile-img" src="{{profileData.ProfileImageUri}}">
+                <h3 class="mb-3">{{profileData.FullName ? profileData.FullName : 'Undefined'}}</h3>
                 <p class="mb-4">
-                  Big belly rude boy, million dollar hustler. Unemployed.
+                  {{profileData.Username ? profileData.Username : 'Undefined'}}
                 </p>
                 <button class="btn btn-success" data-toggle="modal" data-target="#create-post-modal">Create Instagram
                   Post!</button>

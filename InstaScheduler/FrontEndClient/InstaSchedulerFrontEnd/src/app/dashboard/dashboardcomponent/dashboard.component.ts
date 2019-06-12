@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as Dropzone from 'dropzone';
 import { InstagramService } from '../../core/services/instagram.service';
 import * as Validator from 'validator';
+import { InstagramProfile } from 'src/app/shared/interfaces/instagramprofile.interface';
 
 
 @Component({
@@ -16,15 +17,28 @@ export class DashboardComponent implements OnInit {
 
   postImage: File = null;
   postContent: string = null;
+  profileData: InstagramProfile = null;
 
   constructor(private instagramService: InstagramService) { }
 
   ngOnInit() {
     this.initializeDropzoneComponents();
     this.initializeLayoutComponents();
+    this.loadProfileData();
   }
 
 
+  loadProfileData(): void {
+    this.instagramService.retrieveProfileData().subscribe(
+      (data) => {
+        console.log('ProfileData(Dashboard): ' + JSON.stringify(data));
+        this.profileData = data;
+      },
+      (error) => {
+        console.log('An error occured while trying to load the data. Please try again or reload the page');
+      }
+    )
+  }
   initializeLayoutComponents(): void {
     document.getElementById('btn-postimage').setAttribute('disabled', '');
   }

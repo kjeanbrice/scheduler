@@ -20,8 +20,6 @@ namespace InstaScheduler.Controllers
     [RoutePrefix("api/Instagram")]
     public class InstagramAccountController : ApiController
     {
-        static IInstaApi api = null;
-
         public InstagramAccountController()
         {
             
@@ -45,7 +43,7 @@ namespace InstaScheduler.Controllers
             };
 
 
-             api = InstaApiBuilder.CreateBuilder()
+             IInstaApi api = InstaApiBuilder.CreateBuilder()
                 .UseHttpClientHandler(handler)
                 .SetUser(data)
                 .Build();
@@ -67,6 +65,32 @@ namespace InstaScheduler.Controllers
         }
 
 
+
+        [HttpGet]
+        [Route("profile")]
+        public async Task<InstagramProfile> GetProfile()
+        {
+
+            IInstaApi api = (IInstaApi)HttpContext.Current.Session["api"];
+            InstagramProfile result = null;
+            if(api == null || !api.IsUserAuthenticated)
+            {
+                return null;
+            }
+
+            var user = await api.GetCurrentUserAsync();
+            result = new InstagramProfile
+            {
+                FullName = user.Value.FullName,
+                Username = user.Value.UserName,
+                ProfileImageUri = user.Value.ProfilePicture
+            };
+
+
+
+
+            return result;
+        }
 
 
         [HttpPost]
@@ -100,7 +124,7 @@ namespace InstaScheduler.Controllers
                     Uri = @"" + filePath
                 };
 
-                //IInstaApi api = (IInstaApi)HttpContext.Current.Session["api"];
+                IInstaApi api = (IInstaApi)HttpContext.Current.Session["api"];
                 if(api == null || api.IsUserAuthenticated == false)
                 {
                     return Request.CreateResponse(HttpStatusCode.Unauthorized);
@@ -108,6 +132,11 @@ namespace InstaScheduler.Controllers
 
                 var result = await api.MediaProcessor.UploadPhotoAsync(mediaImage, content);
 
+
+                //var collections = await api.GetCurrentUserAsync();
+                //var mediacollections = await api.UserProcessor.GetUserMediaAsync(collections.Value.UserName, InstagramApiSharp.PaginationParameters.MaxPagesToLoad(1));
+                
+                //mediacollections.Value[0].Like
 
 
 
@@ -166,8 +195,14 @@ namespace InstaScheduler.Controllers
         [Route("Logout")]
         public async Task<IHttpActionResult> Logout()
         {
+            IInstaApi api = (IInstaApi)HttpContext.Current.Session["api"];
+            if (api == null || api.IsUserAuthenticated == false)
+            {
+                return Ok();
+            }
 
-            //var result = await api.LogoutAsync();
+
+            var result = await api.LogoutAsync();
             return Ok();
         }
 

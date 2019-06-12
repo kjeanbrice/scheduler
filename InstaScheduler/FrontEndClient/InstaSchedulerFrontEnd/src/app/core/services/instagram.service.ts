@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { retryWhen, delay, take, map, catchError, concatMap, scan, delayWhen } from 'rxjs/operators';
 import { throwError, Observable, concat, of, timer } from 'rxjs';
+import { InstagramProfile } from 'src/app/shared/interfaces/instagramprofile.interface';
 
 
 @Injectable({
@@ -10,6 +11,7 @@ import { throwError, Observable, concat, of, timer } from 'rxjs';
 export class InstagramService {
 
   static readonly BASE_URL: string = document.getElementById('baseurl-asp').innerHTML;
+
 
   constructor(private http: HttpClient) { }
 
@@ -42,6 +44,32 @@ export class InstagramService {
 
 
 
+  }
+
+
+  retrieveProfileData(): Observable<InstagramProfile> {
+    return this.http.get<InstagramProfile>(InstagramService.BASE_URL + '/api/instagram/profile')
+    .pipe(
+        retryWhen((errors) => {
+            return errors.pipe(
+                delay(3000),
+                concatMap((error, index) => {
+                    if (index === 1) {
+                        return throwError(error);
+                    }
+                    return of(null);
+                })
+
+            );
+        }
+        ),
+        map((response: InstagramProfile) => {
+            console.log('Status:' + JSON.stringify(response));
+            return response;
+        }),
+
+        catchError((err: any) => { console.log(err.status); return this.errorHandler(err); })
+    );
   }
 
 

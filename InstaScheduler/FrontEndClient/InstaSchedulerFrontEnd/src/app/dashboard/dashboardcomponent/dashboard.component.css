@@ -15,3 +15,7 @@
 .dz-progress{
     display:none;
 }
+
+.card-header{
+    height: 10.5rem;
+}
