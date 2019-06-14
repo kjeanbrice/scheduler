@@ -1,5 +1,10 @@
 export interface InstagramPost {
-    LikeCount: number;
+    LikesCount: number;
+    CommentsCount: string;
     ViewCount: number;
-    ImageUri: string;
+    ImageUriSmall: string;
+    ImageUriLarge: string;
+    DatePosted: string;
+    TimePosted: string;
+    Description: string;
 }

@@ -1,7 +1,7 @@
 <div class="page">
   <div class="flex-fill">
     <!--Navigation bar -->
-    <app-dashboard-navbar></app-dashboard-navbar>
+    <app-dashboard-navbar [profileData]="profileData"></app-dashboard-navbar>
     <!--Nav Options Area-->
     <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
       <div class="container">
@@ -98,12 +98,12 @@
               <div class="card-header"
                 style="background-image: url(/content/angular/assets/images/profilebg.jpg);"></div>
               <div class="card-body text-center">
-                <img class="card-profile-img" src="{{profileData.ProfileImageUri}}">
-                <h3 class="mb-3">{{profileData.FullName ? profileData.FullName : 'Undefined'}}</h3>
-                <p class="mb-4">
-                  {{profileData.Username ? profileData.Username : 'Undefined'}}
-                </p>
-                <button class="btn btn-success" data-toggle="modal" data-target="#create-post-modal">Create Instagram
+                <img class="card-profile-img" src="{{profileData ? profileData.ProfileImageUri : 'Undefined'}}">
+                
+                <h3 class="mb-3">Hi {{profileData ? profileData.FullName : ''}}!</h3>
+      
+                <button class="btn btn-secondary btn-pill" data-toggle="modal" data-target="#create-post-modal">
+                    <a href="javascript:void(0)" class="icon"><i class="fa fa-calendar mr-2"></i></a>Create Instagram
                   Post!</button>
               </div>
 
@@ -115,7 +115,10 @@
               <h1 class="page-title">
                 My Instagram Posts
               </h1>
-              <div class="page-subtitle">1 - 12 of 1713 photos</div>
+              <div class="page-subtitle"> <span *ngIf="totalPages == 0; then emptyPhotoCount else populatedPhotoCount"></span> - {{currentPage + itemsPerPage < totalPosts ? currentPage + itemsPerPage : totalPosts}} of {{totalPosts}} photo(s)</div>  
+              <ng-template #emptyPhotoCount>0</ng-template>
+              <ng-template #populatedPhotoCount>{{currentPage * itemsPerPage + 1}}</ng-template>
+              
               <div class="page-options d-flex">
                 <select class="form-control custom-select w-auto">
                   <option value="asc">Newest</option>
@@ -136,49 +139,49 @@
                 Post"</b> button!
             </div>
 
-
-            <div class="row row-cards">
-              <div class="col-sm-6 ">
+            
+            <div *ngFor="let posts of displayedPostData;" class="row animated fadeInDown delay-1s row-cards">
+              <div *ngFor="let postitem of posts;" class="col-sm-6 ">
                 <div class="card p-3">
                   <a href="javascript:void(0)" class="mb-3">
-                    <img src="./demo/photos/grant-ritchie-338179-500.jpg" alt="Photo by Nathan Guerrero"
-                      class="rounded">
+                    <img src="{{postitem.ImageUriLarge}}" alt="Photo by {{profileData.Username}} "
+                      class="rounded img-thumbnail">
                   </a>
                   <div class="d-flex align-items-center px-2">
-                    <div class="avatar avatar-md mr-3" style="background-image: url(demo/faces/male/41.jpg)"></div>
                     <div>
-                      <div>Nathan Guerrero</div>
-                      <small class="d-block text-muted">12 days ago</small>
+                      <small class="d-block text-muted">{{postitem.DatePosted}}</small>
+                      <small class="d-block text-muted">{{postitem.TimePosted}}</small>
                     </div>
                     <div class="ml-auto text-muted">
-                      <a href="javascript:void(0)" class="icon"><i class="fe fe-eye mr-1"></i> 112</a>
+                      <a href="javascript:void(0)" class="icon"><i class="fe fe-eye mr-1"></i>{{postitem.ViewCount}}</a>
+                      <a href="javascript:void(0)" class="icon ml-3"><i class="fe fe-message-square mr-1"></i>{{postitem.CommentsCount}}</a>
                       <a href="javascript:void(0)" class="icon d-none d-md-inline-block ml-3"><i
-                          class="fe fe-heart mr-1"></i> 42</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="card p-3">
-                  <a href="javascript:void(0)" class="mb-3">
-                    <img src="./demo/photos/grant-ritchie-338179-500.jpg" alt="Photo by Nathan Guerrero"
-                      class="rounded">
-                  </a>
-                  <div class="d-flex align-items-center px-2">
-                    <div class="avatar avatar-md mr-3" style="background-image: url(demo/faces/male/41.jpg)"></div>
-                    <div>
-                      <div>Nathan Guerrero</div>
-                      <small class="d-block text-muted">12 days ago</small>
-                    </div>
-                    <div class="ml-auto text-muted">
-                      <a href="javascript:void(0)" class="icon"><i class="fe fe-eye mr-1"></i> 112</a>
-                      <a href="javascript:void(0)" class="icon d-none d-md-inline-block ml-3"><i
-                          class="fe fe-heart mr-1"></i> 42</a>
+                          class="fe fe-heart mr-1"></i> {{postitem.LikesCount}}</a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <nav *ngIf= "totalPages > 0">
+              <ul class="pagination justify-content-end">
+                <li class="page-item" (click)="changePage($event,-1)">
+                  <a class="page-link" href="javascript:void(0)" >Previous</a>
+                </li>
+
+                <ng-container *ngFor="let item of totalPagesDom">
+                <li *ngIf="item == currentPage + 1; else regPageNav" (click)="changePage($event,item-1)" id="postpage{{item}}" class="page-item active"><a class="page-link" href="javascript:void(0)">{{item}}</a></li>
+                <ng-template #regPageNav>
+                    <li (click)="changePage($event,item)" id="postpage{{item}}"class="page-item"><a class="page-link" href="javascript:void(0)">{{item}}</a></li>
+                </ng-template>
+                
+               </ng-container>
+                
+                
+                <li class="page-item">
+                  <a class="page-link" (click)="changePage($event,-2)" href="javascript:void(0)">Next</a>
+                </li>
+              </ul>
+            </nav>
           </div>
 
 

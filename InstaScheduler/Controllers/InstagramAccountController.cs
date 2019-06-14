@@ -65,6 +65,52 @@ namespace InstaScheduler.Controllers
         }
 
 
+        [HttpGet]
+        [Route("posts")]
+        public async Task<List<InstagramPost>> GetPosts()
+        {
+            IInstaApi api = (IInstaApi)HttpContext.Current.Session["api"];
+            if (api == null || !api.IsUserAuthenticated)
+            {
+                return null;
+            }
+
+            List<InstagramPost> results = null;
+            var user = await api.GetCurrentUserAsync();
+            if (!user.Succeeded) {
+                return null;
+            }
+
+            var mediaCollections = await api.UserProcessor.GetUserMediaAsync(user.Value.UserName, InstagramApiSharp.PaginationParameters.MaxPagesToLoad(2));
+            if (!mediaCollections.Succeeded)
+            {
+                return null;
+            }
+
+
+            results = new List<InstagramPost>();
+            for (int i = 0; i<mediaCollections.Value.Count; i++)
+            {
+                InstagramPost temp = new InstagramPost();
+                //temp.ImageUri = mediacollections.Value[i].Images[1].Uri;
+                //temp.ViewCount = mediacollections.Value[i].ViewCount;
+                //temp.
+                results.Add(new InstagramPost
+                {
+                    LikesCount = mediaCollections.Value[i].LikesCount,
+                    ViewCount = mediaCollections.Value[i].ViewCount,
+                    CommentsCount = mediaCollections.Value[i].CommentsCount,
+                    ImageUriSmall = mediaCollections.Value[i].Images[1].Uri,
+                    ImageUriLarge = mediaCollections.Value[i].Images[0].Uri,
+                    DatePosted = mediaCollections.Value[i].TakenAt.ToShortDateString(),
+                    TimePosted = mediaCollections.Value[i].TakenAt.ToShortTimeString(),
+                    Description = mediaCollections.Value[i].Caption.Text
+                });
+            }
+
+
+            return results;
+        }
 
         [HttpGet]
         [Route("profile")]
