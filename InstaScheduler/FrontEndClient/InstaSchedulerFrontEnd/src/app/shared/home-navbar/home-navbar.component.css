@@ -33,7 +33,7 @@ nav a img{
 }
 
 nav a span{
-    background-color: rgba(248, 4, 37, 0.87);
+    background-color: #E53167;
     padding: 5px 15px;
     border-radius: 1000px;
     font-weight: 100;
@@ -41,6 +41,30 @@ nav a span{
     margin-left: 7;
 }
 
-.nav-padding{
-    padding: 0 5% 0 5%;
+.nav-left-padding{
+    padding: 1% 20% 3% 0;
+}
+
+.nav-right-padding{
+    padding: 1% 5% 3% 0;
+}
+
+.heading-left{
+    /*background-image: url("/content/angular/assets/images/bgheader.svg");
+    position: absolute;
+    z-index: -1;*/
+    
+    background-repeat: no-repeat;
+    width: 100%;
+    height: auto;
+}
+
+.svg-container{
+    max-width:200px;
+    max-height: 200px;
+    display: inline-block;
+}
+
+.override-padding{
+    padding-left: 0 !important;
 }

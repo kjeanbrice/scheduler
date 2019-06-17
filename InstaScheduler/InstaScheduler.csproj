@@ -249,11 +249,20 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\Angular\assets\css\animate.css" />
     <Content Include="Content\Angular\assets\css\dropzone.css" />
+    <Content Include="Content\Angular\assets\images\bgheader.svg" />
+    <Content Include="Content\Angular\assets\images\card1-img.svg" />
     <Content Include="Content\Angular\assets\images\favicon.ico" />
+    <Content Include="Content\Angular\assets\images\footer-img.svg" />
+    <Content Include="Content\Angular\assets\images\headingleft.png" />
     <Content Include="Content\Angular\assets\images\instaschedule_lg.png" />
     <Content Include="Content\Angular\assets\images\logo.png" />
+    <Content Include="Content\Angular\assets\images\nav-icon.svg" />
     <Content Include="Content\Angular\assets\images\nav_icon.png" />
     <Content Include="Content\Angular\assets\images\profilebg.jpg" />
+    <Content Include="Content\Angular\assets\images\purpose-img.svg" />
+    <Content Include="Content\Angular\assets\images\red-circle-faded.svg" />
+    <Content Include="Content\Angular\assets\images\red-circle.svg" />
+    <Content Include="Content\Angular\assets\images\social.svg" />
     <Content Include="Content\Angular\assets\js\dropzone.js" />
     <Content Include="Content\Angular\es2015-polyfills.js" />
     <Content Include="Content\Angular\favicon.ico" />
@@ -261,6 +270,7 @@
     <Content Include="Content\Angular\main.js" />
     <Content Include="Content\Angular\polyfills.js" />
     <Content Include="Content\Angular\runtime.js" />
+    <Content Include="Content\Angular\scripts.js" />
     <Content Include="Content\Angular\styles.js" />
     <Content Include="Content\Angular\vendor.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -775,6 +785,7 @@
     <Content Include="Content\Angular\runtime.js.map" />
     <Content Include="Content\Angular\styles.js.map" />
     <Content Include="Content\Angular\vendor.js.map" />
+    <Content Include="Content\Angular\scripts.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

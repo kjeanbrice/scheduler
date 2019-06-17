@@ -1,0 +1,11 @@
+.header-img{
+    /*padding: 0 5%;*/
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom right;
+    
+}
+
+.center-items{
+    text-align: center;
+}

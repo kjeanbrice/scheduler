@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
     this.displayedPostData = [];
     this.displayedPostData[containerIndex] = [];
     this.totalPosts = this.postData.length;
-    
+
     while ( i < this.itemsPerPage && j < this.postData.length) {
       if (i % this.itemsPerRow === 0 && i !== 0) {
         this.displayedPostData[++containerIndex] = [];
