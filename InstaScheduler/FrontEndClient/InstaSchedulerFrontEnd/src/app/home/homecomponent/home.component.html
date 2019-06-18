@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page animated fadeIn">
   <div class="flex-fill">
     <!--Navigation bar -->
     <app-home-navbar></app-home-navbar>
@@ -26,18 +26,111 @@
       </div>
     </div> -->
 
-    <div class="my-3 my-mid-5">
-      <div class="container-fluid">
-        <div class="row">
+    <div class="">
+      <div class="container-fluid no-container-gutters">
+        <div class="row landing-section">
           <div class="col-lg-6 col-md-6 col-md-6 col-sm-12">
-            <h1>Take your instagram account to the next level!</h1>
-            <h2> Use it when you need it. InstaPost gives influencers and business owners the ability to fully control every post.</h2>
+            <div class="landing-text">
+              <h1>Take your instagram account to the next level!</h1>
+              <h2> Use it when you need it. This application gives influencers and business owners the ability to fully control every post.</h2>
+              <div class="landing-login-area">
+                <button type="button" class="btn btn-lg dark-pink" routerLink="/login" >Login</button>
+              </div>
+            </div>
           </div>
-          <div class="col-lg-6 col-md-6 col-md-6 col-sm-12 center-items">
+          <div class="col-lg-6 col-md-6  col-sm-12 center-items">
             <img class="header-img" src="/content/angular/assets/images/social.svg"/>
-            <p>Home Page</p>
           </div>
         </div>
+
+
+        <div class = "row pricing-section">
+          <div class="col-lg-6 col-md-12 col-sm-12 first-card-settings">
+              
+            <div class="row item-top-padding">
+              <div class="offset-lg-4  col-lg-7 col-md-12 col-sm-12">
+                  <div class="card card-height">
+                      <div class="card-body text-center">
+                        <div class="card-category">Free</div>
+                        <div class="card-category">Early Access</div>
+                        <div class="my-4">To thank you for being an early user of InstagramPost, your account will be free forever! No monthly payments - you will always have full access to all features for free.</div>
+                        <ul class="list-unstyled leading-loose">
+                          <li><strong>1</strong> User per account</li>
+                          <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Unlimited Posts</li>
+                          <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Instagram API</li>
+                          <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Watermarked Posts</li>
+                        </ul>
+                        <div class="text-center card-position mt-6">
+                          <a href="javascript:void(0);" routerLink="/login" class="btn btn-secondary btn-block">Get Started</a>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+              <div class="offset-lg-1 "></div>
+            </div>
+
+           
+
+
+          </div>
+
+          <div class="col-lg-6 col-md-12 col-sm-12 second-card-settings">
+
+              <div class="row item-top-padding ">
+                  <div class="offset-lg-1  col-lg-7 col-md-12 col-sm-12">
+                      <div class="card card-height">
+                          <div class="card-body text-center">
+                            <div class="card-category">Pro</div>
+                            <div class="display-3 my-4 bottom-padding">$9</div>
+                            <ul class="list-unstyled leading-loose">
+                              <li><strong>1</strong> User per account</li>
+                              <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Unlimited Posts</li>
+                              <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Only 9$ per month</li>
+                              <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Instagram API</li>
+                              <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Watermarked Posts</li>
+                            </ul>
+                            <div class="text-center card-position mt-6">
+                              
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="offset-lg-4"></div>
+                </div>
+      
+          </div>
+        </div>
+
+        <div class="row about-section" >
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="about-bg">
+                <img class="header-img" src="/content/angular/assets/images/purpose-img.svg"/>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 about-des">
+            <div class="about-statement">
+              <h1>Easy to use</h1>
+              <h2>It only takes two steps to start scheduling posts on InstagramPost. First, sign in 
+                with your Instagram account. And finally, you are ready to create a post by uploading a photo and
+                writing a caption.
+              </h2>
+            </div>
+          </div>
+
+        </div>
+
+
+        
+            <footer class="footer-section">
+                <p>&copy; 2019 InstagramPost</p>
+                <div class="footerpages">
+                    <a href="#">Home</a>
+                    <a href="#">Resources</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                </div>
+            </footer>
+      
       </div>
     </div>
   </div>

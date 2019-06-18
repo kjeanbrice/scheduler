@@ -1,3 +1,4 @@
+
 .header-img{
     /*padding: 0 5%;*/
     background-repeat: no-repeat;
@@ -8,4 +9,262 @@
 
 .center-items{
     text-align: center;
+}
+
+div.landing-text h1{
+    font-size: 3.75rem;
+    font-weight: 100;
+    
+
+}
+
+div.landing-text{
+    width: 90%;
+}
+
+div.landing-text h2{
+    font-size: 2.06rem;
+    font-weight: 100;
+}
+
+div.landing-section {
+    padding-top: 2%;
+    padding-left: 8%;
+}
+
+.dark-pink{
+    color: white;
+    padding-left: 20%;
+    padding-right: 20%;
+    background-color: #E53167 !important;
+    border-color: #E53167 !important;
+    -webkit-transition: background-color .5s ease-in-out, border-color .5s ease-in-out;
+    -moz-transition: background-color .5s ease-in-out, border-color .5s ease-in-out;
+    -o-transition: background-color  .5s ease-in-out, border-color .5s ease-in-out;
+    transition: background-color .5s ease-in-out, border-color .5s ease-in-out;
+}
+
+.no-container-gutters{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.dark-pink:hover{
+    background-color: #AC254D !important;
+    border-color: #AC254D !important ;
+}
+
+.landing-login-area{
+     background-image: url("/content/angular/assets/images/faded-pink-oval.svg");
+    /*position: absolute;
+    z-index: -1;*/
+    
+    background-repeat: no-repeat;
+    height: 15rem;
+    width: 15rem;
+    margin-top: 10%;
+}
+
+.card-height{
+    min-height: 520px;
+    
+}
+
+
+.about-bg{
+    /*background-image: url("/content/angular/assets/images/purpose-img.svg");*/
+    /*position: absolute;
+    z-index: -1;*/
+    
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left;
+
+}
+
+.about-section{
+    margin-top: 15%;
+}
+
+.pricing-section{
+    margin-top: 15%;
+}
+
+.item-top-padding{
+    padding-top: 20%;
+}
+
+.first-card-settings{
+    background-image: url("/content/angular/assets/images/card1.svg");
+    /*position: absolute;
+    z-index: -1;*/
+    background-repeat: no-repeat;
+  
+}
+
+
+
+.second-card-settings{
+    background-image: url("/content/angular/assets/images/card2.svg");
+    /*position: absolute;
+    z-index: -1;*/
+    background-repeat: no-repeat;
+  
+}
+
+.card-category{
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+
+
+.about-des {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+
+
+.about-statement{
+    
+}
+
+.about-statement{
+    padding-left: 8%;
+    background-image: url("/content/angular/assets/images/faded-pink-oval.svg");
+    /*position: absolute;
+    z-index: -1;*/
+    
+    background-repeat: no-repeat;
+}
+div.about-statement h1{
+    font-size: 3.30rem;
+    font-weight: 100;
+    
+
+}
+
+
+div.about-statement h2{
+    font-size: 1.71rem;
+    font-weight: 100;
+}
+
+/*------footer------*/
+footer{
+    padding: 30% 5% 0 5%;
+    margin-bottom: 40px;
+    color:  #AC254D;
+}
+
+footer p, .footerpages{
+    display: inline-block;
+}
+
+.footerpages{
+    float: right;
+}
+
+
+.footerpages a{
+    text-decoration: none;
+    font-weight: 200;
+    color:  #AC254D;
+    margin-left: 30px;
+}
+
+.card-position{
+    height: 100%;
+}
+
+
+
+/*-----responsive-----*/
+@media only screen and (max-width: 1000px){
+ 
+    .card-category{
+        font-size: 1.5rem;
+        font-weight: 300;
+    }
+
+    .pricing-section {
+        padding-left: 8%;
+        padding-right: 8%;
+    }
+   
+
+
+    div.landing-text h1{
+        font-size: 3.30rem;
+        font-weight: 100; 
+        margin-top: 10% 
+    }
+    
+    div.landing-text{
+        width: 90%;
+    }
+    
+    div.landing-text h2{
+        font-size: 1.76rem;
+        font-weight: 100;
+    }
+
+    .about-statement{
+        padding-left: 8%;
+        text-align: center;
+    }
+    
+    .card-height{
+        min-height: 1px;
+    }
+
+    footer{
+        text-align: center;
+    }
+
+    .footerpages{
+        visibility: hidden;
+    }
+
+    footer p, .footerpages{
+        display: block;
+    }
+
+}
+
+
+@media only screen and (max-width: 600px){
+    div.landing-text h1{
+        font-size: 2.75rem;
+        font-weight: 100;
+        
+    
+    }
+
+    .card-height{
+        min-height: 1px;
+    }
+
+    .pricing-section {
+        padding-left: 8%;
+        padding-right: 8%;
+    }
+
+    .about-statement{
+        padding-left: 8%;
+        padding-top: 10%;
+        text-align: center;
+    }
+    
+    div.landing-text{
+        width: 90%;
+    }
+    
+    div.landing-text h2{
+        font-size: 1.31rem;
+        font-weight: 100;
+    }
 }
